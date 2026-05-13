@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-product-card',
@@ -8,8 +8,15 @@ import { Component } from '@angular/core';
   styleUrl: './product-card.component.scss',
 })
 export class ProductCardComponent {
-  protected productName = 'A 產品';
-  protected author = '作者A、作者B、作者C';
-  protected company = '博碩文化';
-  protected photoUrl = 'https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img';
+  @Input()
+  productName!: string;
+
+  @Input()
+  author!: string;
+
+  @Input()
+  company!: string;
+
+  @Input()
+  photoUrl!: string;
 }
