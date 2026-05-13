@@ -11,4 +11,5 @@ export class ProductCardComponent {
   protected productName = 'A 產品';
   protected author = '作者A、作者B、作者C';
   protected company = '博碩文化';
+  protected photoUrl = 'https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img';
 }
