@@ -1,16 +1,10 @@
 import { Component, signal } from '@angular/core';
-import { ProductCardComponent } from './product-card/product-card.component';
+import { ProductCardListComponent } from './product-card-list/product-card-list.component';
 
 @Component({
   selector: 'app-root',
-  imports: [ProductCardComponent],
+  imports: [ProductCardListComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class App {
-  protected productName = 'A 產品';
-  protected author = '作者A、作者B、作者C';
-  protected company = '博碩文化';
-  protected photoUrl = 'https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img';
-  protected price = 1580000;
-}
+export class App {}

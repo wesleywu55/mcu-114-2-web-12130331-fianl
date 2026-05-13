@@ -7,6 +7,7 @@ import { Component, Input, numberAttribute } from '@angular/core';
   imports: [CurrencyPipe],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss',
+  host: { class: 'app-product-card' },
 })
 export class ProductCardComponent {
   @Input({ required: true, transform: numberAttribute })
