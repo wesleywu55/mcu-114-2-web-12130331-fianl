@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../model/product';
-import { delay, Observable, of } from 'rxjs';
+import { delay, filter, mergeMap, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -88,7 +88,10 @@ export class ProductService {
     return of({ data: data.slice(startIndex, endIndex), count: this._data.length }).pipe(delay(1000));
   }
 
-  getById(productId: number): Product {
-    return this._data.find(({ id }) => id === productId)!;
+  getById(productId: number): Observable<Product> {
+    return of(this._data).pipe(
+      mergeMap((data) => data),
+      filter(({ id }) => id === productId)
+    );
   }
 }
