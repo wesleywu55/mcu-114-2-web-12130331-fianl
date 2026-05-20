@@ -84,7 +84,7 @@ export class ProductService {
   getList(name: string | undefined, index: number, size: number): Observable<{ data: Product[]; count: number }> {
     return of(this._data).pipe(
       mergeMap((data) => data),
-      filter((item) => (name ? item.name === name : true)),
+      filter((item) => (name ? item.name.toLowerCase().includes(name.toLowerCase()) : true)),
       toArray(),
       map((data) => {
         const startIndex = (index - 1) * size;

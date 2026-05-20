@@ -2,3 +2,28 @@
   display: block;
   padding: 20px;
 }
+
+div.search {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+
+  input {
+    padding: 8px 12px;
+    border: 1px solid #999;
+    border-radius: 4px;
+    width: 200px;
+  }
+
+  button {
+    padding: 8px 16px;
+    background-color: transparent;
+    border: 1px solid #005cbb;
+    color: #005cbb;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #005cbb1a;
+    }
+  }
+}
