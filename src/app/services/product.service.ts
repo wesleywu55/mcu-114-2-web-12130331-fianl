@@ -8,7 +8,7 @@ import { delay, filter, map, mergeMap, Observable, of, toArray } from 'rxjs';
 export class ProductService {
   private _data: Product[] = [
     new Product({
-      id: 1,
+      id: '1',
       name: 'A 產品',
       authors: ['作者A', '作者B', '作者C'],
       company: '博碩文化',
@@ -16,7 +16,7 @@ export class ProductService {
       price: 15800,
     }),
     new Product({
-      id: 2,
+      id: '2',
       name: 'B 產品',
       authors: ['作者A', '作者B', '作者C'],
       company: '博碩文化',
@@ -24,7 +24,7 @@ export class ProductService {
       price: 15800,
     }),
     new Product({
-      id: 3,
+      id: '3',
       name: 'C 產品',
       authors: ['作者A', '作者B', '作者C'],
       company: '博碩文化',
@@ -32,7 +32,7 @@ export class ProductService {
       price: 15800,
     }),
     new Product({
-      id: 4,
+      id: '4',
       name: 'D 產品',
       authors: ['作者A', '作者B', '作者C'],
       company: '博碩文化',
@@ -40,7 +40,7 @@ export class ProductService {
       price: 15800,
     }),
     new Product({
-      id: 5,
+      id: '5',
       name: 'E 產品',
       authors: ['作者A', '作者B', '作者C'],
       company: '博碩文化',
@@ -48,7 +48,7 @@ export class ProductService {
       price: 15800,
     }),
     new Product({
-      id: 6,
+      id: '6',
       name: 'F 產品',
       authors: ['作者A', '作者B', '作者C'],
       company: '博碩文化',
@@ -56,7 +56,7 @@ export class ProductService {
       price: 15800,
     }),
     new Product({
-      id: 7,
+      id: '7',
       name: 'G 產品',
       authors: ['作者A', '作者B', '作者C'],
       company: '博碩文化',
@@ -64,7 +64,7 @@ export class ProductService {
       price: 15800,
     }),
     new Product({
-      id: 8,
+      id: '8',
       name: 'H 產品',
       authors: ['作者A', '作者B', '作者C'],
       company: '博碩文化',
@@ -72,7 +72,7 @@ export class ProductService {
       price: 15800,
     }),
     new Product({
-      id: 9,
+      id: '9',
       name: 'I 產品',
       authors: ['作者A', '作者B', '作者C'],
       company: '博碩文化',
@@ -94,7 +94,7 @@ export class ProductService {
     );
   }
 
-  getById(productId: number): Observable<Product> {
+  getById(productId: string): Observable<Product> {
     return of(this._data).pipe(
       mergeMap((data) => data),
       filter(({ id }) => id === productId)
