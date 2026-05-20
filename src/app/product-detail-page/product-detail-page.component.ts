@@ -1,7 +1,8 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, input, numberAttribute, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from '../model/product';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-product-detail-page',
@@ -9,19 +10,19 @@ import { Product } from '../model/product';
   templateUrl: './product-detail-page.component.html',
   styleUrl: './product-detail-page.component.scss',
 })
-export class ProductDetailPageComponent {
-  protected readonly product = signal(
-    new Product({
-      id: 9,
-      name: 'I 產品',
-      authors: ['作者A', '作者B', '作者C'],
-      company: '博碩文化',
-      photoUrl: 'https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img',
-      price: 1580,
-    })
-  );
+export class ProductDetailPageComponent implements OnInit {
+  id = input.required<number, string | number>({ transform: numberAttribute });
+
+  protected readonly product = signal<Product>(new Product());
 
   private readonly router = inject(Router);
+
+  private readonly productService = inject(ProductService);
+
+  ngOnInit(): void {
+    const product = this.productService.getById(this.id());
+    this.product.set(product);
+  }
 
   onBack(): void {
     this.router.navigate(['products']);
