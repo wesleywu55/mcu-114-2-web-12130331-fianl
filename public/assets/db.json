@@ -1,7 +1,7 @@
 {
-  "Product[]": [
+  "products": [
     {
-      "id": 1,
+      "id": "1",
       "name": "A 產品",
       "authors": [
         "作者A",
@@ -13,7 +13,7 @@
       "price": 15800
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "B 產品",
       "authors": [
         "作者A",
@@ -25,7 +25,7 @@
       "price": 15800
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "C 產品",
       "authors": [
         "作者A",
@@ -37,7 +37,7 @@
       "price": 15800
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "D 產品",
       "authors": [
         "作者A",
@@ -49,7 +49,7 @@
       "price": 15800
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "E 產品",
       "authors": [
         "作者A",
@@ -61,7 +61,7 @@
       "price": 15800
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "F 產品",
       "authors": [
         "作者A",
@@ -73,7 +73,7 @@
       "price": 15800
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "G 產品",
       "authors": [
         "作者A",
@@ -85,7 +85,7 @@
       "price": 15800
     },
     {
-      "id": 8,
+      "id": "8",
       "name": "H 產品",
       "authors": [
         "作者A",
@@ -97,7 +97,7 @@
       "price": 15800
     },
     {
-      "id": 9,
+      "id": "9",
       "name": "I 產品",
       "authors": [
         "作者A",
@@ -108,5 +108,6 @@
       "photoUrl": "https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img",
       "price": 15800
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
