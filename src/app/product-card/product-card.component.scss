@@ -8,7 +8,15 @@
   gap: 10px;
 }
 
-div.content,
+div.content {
+  display: flex;
+  justify-content: space-between;
+
+  strong.discount {
+    color: red;
+  }
+}
+
 div.company,
 div.button {
   display: flex;

@@ -27,6 +27,12 @@
       > span {
         display: inline-block;
         font-size: 18px;
+
+        .discount {
+          color: red;
+          margin-left: 10px;
+          font-weight: bold;
+        }
       }
 
       &.button {

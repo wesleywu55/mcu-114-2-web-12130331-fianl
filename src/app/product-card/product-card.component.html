@@ -1,6 +1,6 @@
 <img [src]="photoUrl()" />
 <div class="content">
-  <strong>{{ productName() }}</strong>
+  <strong [class.discount]="productName() === 'A 產品'">{{ productName() }}</strong>
 </div>
 <div>
   @for (author of authors(); track $index) {
