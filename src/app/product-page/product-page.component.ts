@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Product } from '../model/product';
 import { ProductCardListComponent } from '../product-card-list/product-card-list.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-page',
@@ -9,6 +10,7 @@ import { ProductCardListComponent } from '../product-card-list/product-card-list
   styleUrl: './product-page.component.scss',
 })
 export class ProductPageComponent {
+  private router = inject(Router);
   protected products: Product[] = [
     new Product({
       id: 1,
@@ -51,4 +53,7 @@ export class ProductPageComponent {
       price: 15800,
     }),
   ];
+  protected onView(product: Product): void {
+    this.router.navigate(['product', product.id]);
+  }
 }

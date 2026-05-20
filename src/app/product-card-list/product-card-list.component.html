@@ -1,4 +1,4 @@
-@for(product of products(); track $index) {
+@for (product of products(); track $index) {
 <app-product-card
   [id]="product.id"
   [productName]="product.name"
@@ -6,6 +6,7 @@
   [company]="product.company"
   [photoUrl]="product.photoUrl"
   [price]="product.price"
+  (view)="view.emit(product)"
 ></app-product-card>
 }
-<app-pagination [totalCount]="products().length" [(pageIndex)]="pageIndex" pageSize="2"></app-pagination>
+<app-pagination [totalCount]="products.length" [(pageIndex)]="pageIndex" pageSize="2"></app-pagination>
