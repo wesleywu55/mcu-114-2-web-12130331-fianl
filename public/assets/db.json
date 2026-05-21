@@ -110,5 +110,32 @@
       "price": 15800
     }
   ],
+  "orders": [
+    {
+      "customerName": "12130331",
+      "address": "mcu",
+      "phone": "09xx-xxx-xxx",
+      "items": [
+        {
+          "product": {
+            "id": "3",
+            "name": "C 產品",
+            "authors": [
+              "作者A",
+              "作者B",
+              "作者C"
+            ],
+            "company": "博碩文化",
+            "photoUrl": "https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img",
+            "price": 15800
+          },
+          "quantity": 1
+        }
+      ],
+      "totalPrice": 15800,
+      "date": "2026-05-21T04:42:56.451Z",
+      "id": "loaV1TyKuyo"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }
