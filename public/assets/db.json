@@ -82,7 +82,8 @@
       ],
       "company": "博碩文化",
       "photoUrl": "https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img",
-      "price": 15800
+      "price": 15800,
+      "hidden": true
     },
     {
       "id": "8",

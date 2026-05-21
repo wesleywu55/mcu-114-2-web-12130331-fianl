@@ -15,4 +15,6 @@ export class Product {
   photoUrl!: string;
 
   price!: number;
+
+  hidden?: boolean;
 }
