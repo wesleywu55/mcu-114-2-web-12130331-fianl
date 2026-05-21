@@ -1,5 +1,7 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, input, numberAttribute, output } from '@angular/core';
+import { Component, inject, input, numberAttribute, output } from '@angular/core';
+import { ShoppingCartService } from '../services/shopping-cart.service';
+import { Product } from '../model/product';
 
 @Component({
   selector: 'app-product-card',
@@ -10,6 +12,8 @@ import { Component, input, numberAttribute, output } from '@angular/core';
   host: { class: 'app-product-card' },
 })
 export class ProductCardComponent {
+  private readonly cartService = inject(ShoppingCartService);
+
   readonly id = input.required<string>();
 
   readonly productName = input<string>();
@@ -23,4 +27,16 @@ export class ProductCardComponent {
   readonly price = input<number, string | number>(0, { transform: numberAttribute });
 
   readonly view = output<void>();
+
+  onAddToCart(): void {
+    const product = new Product({
+      id: this.id(),
+      name: this.productName(),
+      authors: this.authors(),
+      company: this.company(),
+      photoUrl: this.photoUrl(),
+      price: this.price(),
+    });
+    this.cartService.addProduct(product);
+  }
 }
