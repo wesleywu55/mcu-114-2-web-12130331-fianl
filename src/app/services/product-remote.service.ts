@@ -19,19 +19,20 @@ export class ProductRemoteService extends ProductService {
   }
 
   override getList(name: string | undefined, index: number, size: number): Observable<{ data: Product[]; count: number }> {
-    let query = {} as any;
-    if (name) query = { ...query, name_like: name };
-    const params = new HttpParams({ fromObject: query });
-
-    return this.httpClient.get<Product[]>(this.url, { params }).pipe(
+    return this.httpClient.get<Product[]>(this.url).pipe(
       map((allData) => {
-        const visibleData = allData.filter((p) => !p.hidden);
-
-        const totalCount = visibleData.length;
-
+        let filtered = allData.filter((p) => !p.hidden);
+        
+        if (name) {
+          const searchKey = name.toLowerCase();
+          filtered = filtered.filter((p) => p.name.toLowerCase().includes(searchKey));
+        }
+        
+        const totalCount = filtered.length;
+        
         const startIndex = (index - 1) * size;
-        const paginatedData = visibleData.slice(startIndex, startIndex + size);
-
+        const paginatedData = filtered.slice(startIndex, startIndex + size);
+        
         return { data: paginatedData, count: totalCount };
       })
     );
