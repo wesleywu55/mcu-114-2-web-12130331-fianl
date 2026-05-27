@@ -14,6 +14,8 @@ export class ShoppingCartService {
 
   readonly items = this._items.asReadonly();
 
+  readonly distinctCount = computed(() => this._items().length);
+
   readonly totalCount = computed(() => this._items().reduce((acc, item) => acc + item.quantity, 0));
 
   readonly totalPrice = computed(() => this._items().reduce((acc, item) => acc + item.product.price * item.quantity, 0));
@@ -23,11 +25,7 @@ export class ShoppingCartService {
     const existingItem = currentItems.find((item) => item.product.id === product.id);
 
     if (existingItem) {
-      this._items.set(
-        currentItems.map((item) =>
-          item.product.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-        )
-      );
+      this._items.set(currentItems.map((item) => (item.product.id === product.id ? { ...item, quantity: item.quantity + 1 } : item)));
     } else {
       this._items.set([...currentItems, { product, quantity: 1 }]);
     }
@@ -42,11 +40,7 @@ export class ShoppingCartService {
       this.removeProduct(productId);
       return;
     }
-    this._items.set(
-      this._items().map((item) =>
-        item.product.id === productId ? { ...item, quantity } : item
-      )
-    );
+    this._items.set(this._items().map((item) => (item.product.id === productId ? { ...item, quantity } : item)));
   }
 
   clearCart(): void {
