@@ -36,11 +36,9 @@ export class ShoppingCartService {
   }
 
   updateQuantity(productId: string, quantity: number): void {
-    if (quantity <= 0) {
-      this.removeProduct(productId);
-      return;
-    }
-    this._items.set(this._items().map((item) => (item.product.id === productId ? { ...item, quantity } : item)));
+    const safeQuantity = Number.isFinite(quantity) ? Math.max(1, Math.floor(quantity)) : 1;
+
+    this._items.set(this._items().map((item) => (item.product.id === productId ? { ...item, quantity: safeQuantity } : item)));
   }
 
   clearCart(): void {

@@ -48,6 +48,8 @@
           <div class="qty">
             <input
               type="number"
+              min="1"
+              step="1"
               [value]="item.quantity"
               (input)="cartService.updateQuantity(item.product.id, +$any($event.target).value)"
             />
