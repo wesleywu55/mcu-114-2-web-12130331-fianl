@@ -10,7 +10,6 @@ POST {{webApiUrl}}
 Content-Type: application/json
 
 {
-  "id": "{{productId}}",
   "studentId": "12130331",
   "name": "D 產品",
   "authors": [
