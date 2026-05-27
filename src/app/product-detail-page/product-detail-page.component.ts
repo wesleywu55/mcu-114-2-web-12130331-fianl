@@ -18,12 +18,27 @@ export class ProductDetailPageComponent {
 
   private readonly cartService = inject(ShoppingCartService);
 
+  protected hasSpecialPrice(): boolean {
+    return this.normalizeSpecialPrice(this.product().specialPrice) !== null;
+  }
+
+  protected displayPrice(): number {
+    const product = this.product();
+    return this.normalizeSpecialPrice(product.specialPrice) ?? product.price;
+  }
+
+  private normalizeSpecialPrice(value: number | null | undefined): number | null {
+    return typeof value === 'number' && Number.isFinite(value) ? value : null;
+  }
+
   onBack(): void {
     this.router.navigate(['products']);
   }
 
   onAddToCart(): void {
-    this.cartService.addProduct(this.product());
+    const product = this.product();
+    const effectivePrice = this.displayPrice();
+    this.cartService.addProduct(new Product({ ...product, price: effectivePrice }));
     this.router.navigate(['products']);
   }
 }

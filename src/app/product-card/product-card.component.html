@@ -1,6 +1,6 @@
 <img [src]="photoUrl()" />
 <div class="content">
-  <strong [class.discount]="productName() === 'A 產品'">{{ productName() }}</strong>
+  <strong [class.discount]="hasSpecialPrice()">{{ productName() }}</strong>
 </div>
 <div>
   @for (author of authors(); track $index) {
@@ -11,7 +11,7 @@
 </div>
 <div class="company">
   <span>{{ company() }}</span>
-  <span>{{ price() | currency : '$' : 'symbol' : '4.2' }}</span>
+  <span>{{ displayPrice() | currency : '$' : 'symbol' : '4.2' }}</span>
 </div>
 <div class="button">
   <button type="button" (click)="view.emit()">明細</button>

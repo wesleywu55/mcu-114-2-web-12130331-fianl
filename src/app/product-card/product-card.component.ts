@@ -26,16 +26,32 @@ export class ProductCardComponent {
 
   readonly price = input<number, string | number>(0, { transform: numberAttribute });
 
+  readonly specialPrice = input<number | null, string | number | null | undefined>(null, { transform: numberAttribute });
+
   readonly view = output<void>();
 
+  protected hasSpecialPrice(): boolean {
+    return this.normalizeSpecialPrice(this.specialPrice()) !== null;
+  }
+
+  protected displayPrice(): number {
+    return this.normalizeSpecialPrice(this.specialPrice()) ?? this.price();
+  }
+
+  private normalizeSpecialPrice(value: number | null | undefined): number | null {
+    return typeof value === 'number' && Number.isFinite(value) ? value : null;
+  }
+
   onAddToCart(): void {
+    const effectivePrice = this.displayPrice();
     const product = new Product({
       id: this.id(),
       name: this.productName(),
       authors: this.authors(),
       company: this.company(),
       photoUrl: this.photoUrl(),
-      price: this.price(),
+      price: effectivePrice,
+      specialPrice: this.normalizeSpecialPrice(this.specialPrice()),
     });
     this.cartService.addProduct(product);
   }

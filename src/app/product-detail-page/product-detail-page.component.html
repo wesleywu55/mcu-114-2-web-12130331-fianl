@@ -18,8 +18,7 @@
   <div>
     <strong>價格</strong>
     <span>
-      {{ product().price | currency : '$' : 'symbol' : '4.2' }}
-      @if (product().name === 'A 產品') {
+      {{ displayPrice() | currency : '$' : 'symbol' : '4.2' }} @if (hasSpecialPrice()) {
       <span class="discount">特價</span>
       }
     </span>

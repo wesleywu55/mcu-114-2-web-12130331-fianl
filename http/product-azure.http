@@ -27,7 +27,7 @@ Content-Type: application/json
 }
 
 ### 取得特定產品 (請更換為實際產生的 ID)
-@productId = df70e582-df66-4380-ac0a-497bcfb6a07d
+@productId = 99c77dfa-c8c6-4a75-9901-d6e4ce412ff7
 GET {{webApiUrl}}/{{productId}}
 
 ### 更新產品
@@ -37,14 +37,14 @@ Content-Type: application/json
 {
   "id": "{{productId}}",
   "studentId": "12130331",
-  "name": "C 產品",
+  "name": "B 產品",
   "authors": [
     "作者A",
     "作者B",
     "作者C"
   ],
   "company": "博碩文化",
-  "isShow": false,
+  "isShow": true,
   "specialPrice": null,
   "photoUrl": "https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img",
   "price": 15800,
