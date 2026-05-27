@@ -46,6 +46,10 @@
           <span class="idx">{{ $index + 1 }}</span>
           <span class="name">{{ item.product.name }}</span>
           <div class="qty">
+            <span class="unit-price">
+              <span class="label">單價</span>
+              {{ item.product.price | currency : '$' : 'symbol' : '1.2-2' }}
+            </span>
             <input
               type="number"
               min="1"
