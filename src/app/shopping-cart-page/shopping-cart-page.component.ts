@@ -1,33 +1,38 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ShoppingCartService } from '../services/shopping-cart.service';
 
 @Component({
   selector: 'app-shopping-cart-page',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './shopping-cart-page.component.html',
   styleUrl: './shopping-cart-page.component.scss',
 })
 export class ShoppingCartPageComponent {
   protected readonly cartService = inject(ShoppingCartService);
   private readonly http = inject(HttpClient);
+  private readonly fb = inject(FormBuilder);
 
-  protected name = '';
-  protected address = '';
-  protected phone = '';
+  protected readonly checkoutForm = this.fb.nonNullable.group({
+    name: ['', Validators.required],
+    address: ['', Validators.required],
+    phone: ['', Validators.required],
+  });
 
   protected onSubmit(): void {
-    if (!this.name || !this.address || !this.phone) {
+    if (this.checkoutForm.invalid) {
+      this.checkoutForm.markAllAsTouched();
       return;
     }
 
+    const { name, address, phone } = this.checkoutForm.getRawValue();
     const orderData = {
-      customerName: this.name,
-      address: this.address,
-      phone: this.phone,
+      customerName: name,
+      address,
+      phone,
       items: this.cartService.items(),
       totalPrice: this.cartService.totalPrice(),
       date: new Date().toISOString(),
@@ -37,9 +42,7 @@ export class ShoppingCartPageComponent {
       next: () => {
         alert('訂單已送出');
         this.cartService.clearCart();
-        this.name = '';
-        this.address = '';
-        this.phone = '';
+        this.checkoutForm.reset({ name: '', address: '', phone: '' });
       },
       error: (err) => {
         console.error('訂單送出失敗', err);

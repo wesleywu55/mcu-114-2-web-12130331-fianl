@@ -1,23 +1,38 @@
-<div class="cart-page">
+<form class="cart-page" [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
   <div class="layout-container">
     <!-- 左側：基本資料 -->
     <div class="section base-info">
       <div class="section-header">基本資料</div>
       <div class="section-body">
         <div class="form-row">
-          <label>姓名</label>
-          <input type="text" [(ngModel)]="name" />
-          <span class="error-msg" [style.visibility]="!name ? 'visible' : 'hidden'">請輸入姓名</span>
+          <label for="customer-name">姓名</label>
+          <input id="customer-name" type="text" formControlName="name" />
+          <span
+            class="error-msg"
+            [style.visibility]="checkoutForm.controls.name.touched && checkoutForm.controls.name.invalid ? 'visible' : 'hidden'"
+          >
+            請輸入姓名
+          </span>
         </div>
         <div class="form-row">
-          <label>地址</label>
-          <input type="text" [(ngModel)]="address" />
-          <span class="error-msg" [style.visibility]="!address ? 'visible' : 'hidden'">請輸入地址</span>
+          <label for="customer-address">地址</label>
+          <input id="customer-address" type="text" formControlName="address" />
+          <span
+            class="error-msg"
+            [style.visibility]="checkoutForm.controls.address.touched && checkoutForm.controls.address.invalid ? 'visible' : 'hidden'"
+          >
+            請輸入地址
+          </span>
         </div>
         <div class="form-row">
-          <label>電話</label>
-          <input type="text" [(ngModel)]="phone" />
-          <span class="error-msg" [style.visibility]="!phone ? 'visible' : 'hidden'">請輸入電話</span>
+          <label for="customer-phone">電話</label>
+          <input id="customer-phone" type="text" formControlName="phone" />
+          <span
+            class="error-msg"
+            [style.visibility]="checkoutForm.controls.phone.touched && checkoutForm.controls.phone.invalid ? 'visible' : 'hidden'"
+          >
+            請輸入電話
+          </span>
         </div>
       </div>
     </div>
@@ -31,10 +46,14 @@
           <span class="idx">{{ $index + 1 }}</span>
           <span class="name">{{ item.product.name }}</span>
           <div class="qty">
-            <input type="number" [ngModel]="item.quantity" (ngModelChange)="cartService.updateQuantity(item.product.id, $event)" />
+            <input
+              type="number"
+              [value]="item.quantity"
+              (input)="cartService.updateQuantity(item.product.id, +$any($event.target).value)"
+            />
           </div>
           <span class="price">{{ item.product.price * item.quantity | currency : '$' : 'symbol' : '1.2-2' }}</span>
-          <button class="del-btn" (click)="cartService.removeProduct(item.product.id)">刪除</button>
+          <button class="del-btn" type="button" (click)="cartService.removeProduct(item.product.id)">刪除</button>
         </div>
         }
       </div>
@@ -42,8 +61,8 @@
   </div>
 
   <div class="action-footer">
-    <button class="submit-btn" [disabled]="!name || !address || !phone || cartService.items().length === 0" (click)="onSubmit()">
+    <button class="submit-btn" type="submit" [disabled]="checkoutForm.invalid || cartService.items().length === 0">
       送出訂單 ({{ cartService.totalPrice() | currency : '$' : 'symbol' : '1.2-2' }})
     </button>
   </div>
-</div>
+</form>
