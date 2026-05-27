@@ -17,4 +17,6 @@ export class Product {
   price!: number;
 
   hidden?: boolean;
+
+  isShow?: boolean;
 }
