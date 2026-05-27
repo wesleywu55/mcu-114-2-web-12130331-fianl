@@ -24,5 +24,6 @@ export class ProductDetailPageComponent {
 
   onAddToCart(): void {
     this.cartService.addProduct(this.product());
+    this.router.navigate(['products']);
   }
 }
