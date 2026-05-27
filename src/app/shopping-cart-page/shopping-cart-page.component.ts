@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { ShoppingCartService } from '../services/shopping-cart.service';
+import { OrderAzureService, OrderPayload } from '../services/order-azure.service';
 
 @Component({
   selector: 'app-shopping-cart-page',
@@ -13,7 +13,7 @@ import { ShoppingCartService } from '../services/shopping-cart.service';
 })
 export class ShoppingCartPageComponent {
   protected readonly cartService = inject(ShoppingCartService);
-  private readonly http = inject(HttpClient);
+  private readonly orderService = inject(OrderAzureService);
   private readonly fb = inject(FormBuilder);
 
   protected readonly checkoutForm = this.fb.nonNullable.group({
@@ -29,16 +29,17 @@ export class ShoppingCartPageComponent {
     }
 
     const { name, address, phone } = this.checkoutForm.getRawValue();
-    const orderData = {
+    const orderData: OrderPayload = {
       customerName: name,
       address,
       phone,
-      items: this.cartService.items(),
-      totalPrice: this.cartService.totalPrice(),
-      date: new Date().toISOString(),
+      orderDetails: this.cartService.items().map((item) => ({
+        productId: item.product.id,
+        quantity: item.quantity,
+      })),
     };
 
-    this.http.post('http://localhost:3000/orders', orderData).subscribe({
+    this.orderService.createOrder(orderData).subscribe({
       next: () => {
         alert('訂單已送出');
         this.cartService.clearCart();
