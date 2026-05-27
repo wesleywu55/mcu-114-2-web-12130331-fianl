@@ -1,0 +1,50 @@
+@webApiUrl = https://mcu-shopping-api.azurewebsites.net/api/product
+@studentId = 12130331
+
+### 取得所有產品
+GET {{webApiUrl}}?studentId={{studentId}}
+Accept: application/json
+
+### 建立新產品
+POST {{webApiUrl}}
+Content-Type: application/json
+
+{
+  "id": "1",
+  "name": "A 產品",
+  "authors": [
+    "作者A",
+    "作者B",
+    "作者C"
+  ],
+  "company": "博碩文化",
+  "photoUrl": "https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img",
+  "price": 15800
+}
+
+
+@productId = 88f7363c-b27f-48ee-9b03-cadd8dfe4c07
+
+### 取得特定產品 (請更換為實際產生的 ID)
+GET {{webApiUrl}}/{{productId}}
+
+### 更新產品
+PUT {{webApiUrl}}/{{productId}}
+Content-Type: application/json
+
+{
+  "id": "{{productId}}",
+  "studentId": "{{studentId}}",
+  "name": "A 產品 (已更新)",
+  "authors": [
+    "作者A",
+    "作者B",
+    "作者C"
+  ],
+  "company": "博碩文化",
+  "photoUrl": "https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img",
+  "price": 15800
+}
+
+### 刪除產品
+DELETE {{webApiUrl}}/{{productId}}
