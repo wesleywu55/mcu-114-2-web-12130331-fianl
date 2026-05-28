@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { ShoppingCartService } from '../services/shopping-cart.service';
 import { OrderAzureService, OrderPayload } from '../services/order-azure.service';
 
@@ -17,10 +17,14 @@ export class ShoppingCartPageComponent {
   private readonly fb = inject(FormBuilder);
 
   protected readonly checkoutForm = this.fb.nonNullable.group({
-    name: ['', Validators.required],
-    address: ['', Validators.required],
-    phone: ['', Validators.required],
+    name: ['', [Validators.required, ShoppingCartPageComponent.noWhitespaceValidator]],
+    address: ['', [Validators.required, ShoppingCartPageComponent.noWhitespaceValidator]],
+    phone: ['', [Validators.required, ShoppingCartPageComponent.noWhitespaceValidator]],
   });
+
+  private static noWhitespaceValidator(control: AbstractControl<string>): ValidationErrors | null {
+    return control.value.trim().length === 0 ? { whitespace: true } : null;
+  }
 
   protected onSubmit(): void {
     if (this.checkoutForm.invalid) {
